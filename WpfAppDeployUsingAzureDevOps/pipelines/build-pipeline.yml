@@ -69,9 +69,10 @@ steps:
     artifactName: 'drop'
     publishLocation: 'Container'
 
+# Upload
 - task: AzureFileCopy@4
   inputs:
-    SourcePath: 'drop'
+    SourcePath: '$(Build.ArtifactStagingDirectory)\drop'
     azureSubscription: '従量課金(ad7805a2-0c71-4457-93b0-985d031ab10b)'
     Destination: 'AzureBlob'
     storage: 'appcontainer'

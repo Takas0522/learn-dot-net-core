@@ -4,3 +4,5 @@ https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/build/dotnet-core-
 https://github.com/dotnet/sdk/issues/7263
 https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/utility/copy-files?view=azure-devops&tabs=yaml
 https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/utility/powershell?view=azure-devops
+https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/utility/publish-build-artifacts?view=azure-devops
+https://docs.microsoft.com/ja-jp/azure/devops/pipelines/build/variables?view=azure-devops&viewFallbackFrom=azdevops&tabs=yaml
