@@ -38,6 +38,7 @@ steps:
 - task: CopyFiles@2
   inputs:
     contents: '**\bin\Release\**\publish\*.exe'
+    flattenFolders: true
     targetFolder: '$(build.artifactstagingdirectory)'
 
 ## Publish To Drop
