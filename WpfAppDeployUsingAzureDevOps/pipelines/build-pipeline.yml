@@ -41,7 +41,7 @@ steps:
     targetFolder: '$(build.artifactstagingdirectory)'
 
 ## Publish To Drop
-- task: PublishBuildArtifacts@2
+- task: PublishBuildArtifacts@1
   inputs:
     pathToPublish: '$(build.artifactstagingdirectory)'
     artifactName: 'drop'
