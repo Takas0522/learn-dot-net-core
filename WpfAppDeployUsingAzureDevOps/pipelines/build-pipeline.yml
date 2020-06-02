@@ -8,7 +8,6 @@ variables:
   project: '**/WpfAppDeployUsingAzureDevOps/**/*.csproj'
   days: 0
   dayinterval: 0
-  subscrption: 従量課金(ad7805a2-0c71-4457-93b0-985d031ab10b)
 
 steps:
 # Calc Build Settings
