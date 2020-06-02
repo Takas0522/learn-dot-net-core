@@ -6,8 +6,21 @@ pool:
 
 variables:
   project: '**/WpfAppDeployUsingAzureDevOps/**/*.csproj'
+  days: 0
 
 steps:
+# Calc Build Settings
+-task: PowerShell@2
+  inputs:
+      targetType: inline
+      script: |
+        $baseDate = [datetime]"02/06/2020"
+        $currentDate = $(Get-Date)
+        $interval = NEW-TIMESPAN -Start $baseDate -End $currentDate
+        $days = $interval.Days
+        Write-Host "##vso[task.setvariable variable=days]$days"
+        echo $days
+
 ## NuGet Restore
 - task: DotNetCoreCLI@2
   inputs:
@@ -32,7 +45,7 @@ steps:
   inputs:
     solution: '**/WpfAppDeployUsingAzureDevOps/**/*.csproj'
     configuration: Release
-    msbuildArguments: /t:Publish /p:Day=127 /p:BuildNumber=12
+    msbuildArguments: /t:Publish /p:Day=$(days) /p:BuildNumber=12
 
 ## CopyFile
 - task: CopyFiles@2
