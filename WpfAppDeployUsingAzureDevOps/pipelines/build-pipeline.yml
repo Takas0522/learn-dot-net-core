@@ -72,7 +72,7 @@ steps:
 # Upload
 - task: AzureFileCopy@4
   inputs:
-    SourcePath: '$(build.artifactstagingdirectory)'
+    SourcePath: '$(build.artifactstagingdirectory)\*.exe'
     azureSubscription: 'AzureSubsc'
     Destination: 'AzureBlob'
     storage: 'appcontainer'

@@ -8,3 +8,4 @@ https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/utility/publish-bu
 https://docs.microsoft.com/ja-jp/azure/devops/pipelines/build/variables?view=azure-devops&viewFallbackFrom=azdevops&tabs=yaml
 https://blog.shibayan.jp/entry/20190806/1565085492
 https://brettmckenzie.net/2020/03/23/azure-pipelines-copy-files-task-authentication-failed/
+https://github.com/MicrosoftDocs/azure-docs/issues/36454
