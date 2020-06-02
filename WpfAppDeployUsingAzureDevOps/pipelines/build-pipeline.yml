@@ -74,7 +74,7 @@ steps:
 - task: AzureFileCopy@4
   inputs:
     SourcePath: '$(build.artifactstagingdirectory)'
-    azureSubscription: '従量課金(ad7805a2-0c71-4457-93b0-985d031ab10b)'
+    azureSubscription: 'AzureSubsc'
     Destination: 'AzureBlob'
     storage: 'appcontainer'
     ContainerName: 'application'
