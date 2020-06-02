@@ -4,6 +4,12 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
+    <Day Condition=" '$(Day)' == '' ">0</Day>
+    <BuildNumber Condition=" '$(BuildNumber)' == '' ">0</BuildNumber>
+    <PublishSingleFile>true</PublishSingleFile>
+    <RuntimeIdentifier>win-x86</RuntimeIdentifier>
+    <AssemblyVersion>0.0.$(Day).$(BuildNumber)</AssemblyVersion>
+    <VersionPrefix>0.0.$(Day).$(BuildNumber)</VersionPrefix>
   </PropertyGroup>
 
 </Project>

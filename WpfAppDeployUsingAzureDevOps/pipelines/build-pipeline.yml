@@ -1,0 +1,48 @@
+trigger:
+- master
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  project: '**/WpfAppDeployUsingAzureDevOps/**/*.csproj'
+
+steps:
+## NuGet Restore
+- task: DotNetCoreCLI@2
+  inputs:
+    command: restore
+    projects: '$(project)'
+
+## Test
+- task: DotNetCoreCLI@2
+  inputs:
+    command: test
+    projects: '$(project)'
+
+## Build
+- task: DotNetCoreCLI@2
+  inputs:
+    command: build
+    arguments: -c Release
+    projects: '$(project)'
+
+## Publish
+- task: DotNetCoreCLI@2
+  inputs:
+    command: msbuild
+    arguments: -property:Configuration=Release -target:Publish -p:Day=125 -p:BuildNumber=10
+    projects: '$(project)'
+
+## CopyFile
+- task: CopyFiles@2
+  inputs:
+    contents: '**\bin\Release\**\publish\*.exe'
+    targetFolder: '$(build.artifactstagingdirectory)'
+
+## Publish To Drop
+- task: PublishBuildArtifacts@2
+  inputs:
+    pathToPublish: '$(build.artifactstagingdirectory)'
+    artifactName: 'drop'
+    publishLocation: 'Container'
