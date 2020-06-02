@@ -6,3 +6,4 @@ https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/utility/copy-files
 https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/utility/powershell?view=azure-devops
 https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/utility/publish-build-artifacts?view=azure-devops
 https://docs.microsoft.com/ja-jp/azure/devops/pipelines/build/variables?view=azure-devops&viewFallbackFrom=azdevops&tabs=yaml
+https://blog.shibayan.jp/entry/20190806/1565085492
