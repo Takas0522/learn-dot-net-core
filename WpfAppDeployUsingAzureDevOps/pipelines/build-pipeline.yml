@@ -16,7 +16,7 @@ steps:
   inputs:
       targetType: inline
       script: |
-        $baseDate = [datetime]"02/06/2020"
+        $baseDate = [datetime]"06/02/2020"
         $currentDate = $(Get-Date)
         $interval = NEW-TIMESPAN -Start $baseDate -End $currentDate
         $days = $interval.Days
@@ -25,7 +25,7 @@ steps:
         $today = Get-Date -f d
         $startdate = Get-Date $today
         $todayinterval = NEW-TIMESPAN -Start $startdate -End $currentDate
-        $dayinterval = $todayinterval.TotalSeconds
+        $dayinterval = [Math]::Truncate($todayinterval.TotalMinutes)
         Write-Host "##vso[task.setvariable variable=dayinterval]$dayinterval"
         echo $dayinterval
 
@@ -53,7 +53,7 @@ steps:
   inputs:
     solution: '**/WpfAppDeployUsingAzureDevOps/**/*.csproj'
     configuration: Release
-    msbuildArguments: /t:Publish /p:Day=$(days) /p:BuildNumber=12
+    msbuildArguments: /t:Publish /p:Day=$(days) /p:BuildNumber=$(dayinterval)
 
 ## CopyFile
 - task: CopyFiles@2
