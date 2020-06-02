@@ -28,11 +28,11 @@ steps:
     projects: '$(project)'
 
 ## Publish
-- task: DotNetCoreCLI@2
+- task: MSBuild@1
   inputs:
-    command: msbuild
-    arguments: -property:Configuration=Release -target:Publish -p:Day=125 -p:BuildNumber=10
-    projects: '$(project)'
+    solution: '**/WpfAppDeployUsingAzureDevOps/**/*.csproj'
+    configuration: Release
+    msbuildArguments: /t:Publish /p:Day=127 /p:BuildNumber=12
 
 ## CopyFile
 - task: CopyFiles@2
