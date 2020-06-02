@@ -7,10 +7,12 @@ pool:
 variables:
   project: '**/WpfAppDeployUsingAzureDevOps/**/*.csproj'
   days: 0
+  dayinterval: 0
 
 steps:
 # Calc Build Settings
 - task: PowerShell@2
+  displayName: 'Calc Build Version'
   inputs:
       targetType: inline
       script: |
@@ -20,6 +22,12 @@ steps:
         $days = $interval.Days
         Write-Host "##vso[task.setvariable variable=days]$days"
         echo $days
+        $today = Get-Date -f d
+        $startdate = Get-Date $today
+        $todayinterval = NEW-TIMESPAN -Start $startdate -End $currentDate
+        $dayinterval = $todayinterval.TotalSeconds
+        Write-Host "##vso[task.setvariable variable=dayinterval]$dayinterval"
+        echo $dayinterval
 
 ## NuGet Restore
 - task: DotNetCoreCLI@2
