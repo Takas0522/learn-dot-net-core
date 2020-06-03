@@ -77,3 +77,11 @@ steps:
     Destination: 'AzureBlob'
     storage: 'appcontainer'
     ContainerName: 'application'
+
+# GetKeyVaultValue
+- task: AzureKeyVault@1
+  inputs:
+    azureSubscription: 'AzureSubsc'
+    KeyVaultName: 'takas-sanbox-kv'
+    SecretsFilter: 'testhoge'
+    RunAsPreJob: false
