@@ -85,3 +85,10 @@ steps:
     KeyVaultName: 'takas-sanbox-kv'
     SecretsFilter: 'testhoge'
     RunAsPreJob: false
+
+- task: PowerShell@2
+  displayName: 'Calc Build Version'
+  inputs:
+      targetType: inline
+      script: |
+        echo $testhoge
