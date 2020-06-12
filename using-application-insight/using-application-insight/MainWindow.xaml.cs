@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.ApplicationInsights;
+using Microsoft.ApplicationInsights.Extensibility;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,21 @@ namespace using_application_insight
         public MainWindow()
         {
             InitializeComponent();
+
+            TelemetryConfiguration configuration = TelemetryConfiguration.CreateDefault();
+            configuration.InstrumentationKey = "<InstrumentationKey>";
+            var telemetryClient = new TelemetryClient(configuration);
+            telemetryClient.TrackTrace("Application Run");
+            telemetryClient.TrackEvent("My Event");
+            try
+            {
+                throw new Exception("CUSTOM ERROR");
+            }
+            catch (Exception e)
+            {
+                telemetryClient.TrackException(e);
+            }
+            telemetryClient.Flush();
         }
     }
 }
