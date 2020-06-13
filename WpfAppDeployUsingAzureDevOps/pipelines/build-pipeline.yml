@@ -53,7 +53,7 @@ steps:
   inputs:
     solution: '**/WpfAppDeployUsingAzureDevOps/**/*.csproj'
     configuration: Release
-    msbuildArguments: /t:Publish /p:Day=$(days) /p:BuildNumber=$(dayinterval)
+    msbuildArguments: /t:Publish /p:BuildNumber=$(days) /p:Revision=$(dayinterval)
 
 ## CopyFile
 - task: CopyFiles@2
