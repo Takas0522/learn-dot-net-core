@@ -14,7 +14,7 @@ Semantic KernelにMicrosoft Graphと接続するSkillがあったので使い方
 * CloudDrive
 * Email
 * TaskList
-
+* 
 
 # 公式サンプルのある場所
 
