@@ -1,6 +1,6 @@
 Semantic KernelにMicrosoft Graphと接続するSkillがあったので使い方を確かめてみる。
 
-コードの実態は[Program.cs](./Program.cs)のみなのでコードはそちらを参考に。。
+コードの実態は[Program.cs](./MsGraphSkillsSample/Program.cs)のみなのでコードはそちらを参考に。。
 
 # 注意
 
@@ -14,7 +14,6 @@ Semantic KernelにMicrosoft Graphと接続するSkillがあったので使い方
 * CloudDrive
 * Email
 * TaskList
-* 
 
 # 公式サンプルのある場所
 
@@ -58,7 +57,7 @@ Azure ADアプリケーションは`Mobile and desktop applications`でlocalhost
 
 ![](./.attachments/2023-07-02-17-29-26.png)
 
-`appsettings.json`の設定は、このコードの[appsettings.json](./appsettings.json)の`MsGraph`セクション参照。
+`appsettings.json`の設定は、このコードの[appsettings.json](./MsGraphSkillsSample/appsettings.json)の`MsGraph`セクション参照。
 
 ## Semantic Kernelの設定
 
@@ -83,7 +82,7 @@ var chatCompletion = sk.GetService<IChatCompletion>();
 
 OpenAIサービスでチャットを行えるようにする設定とスキルのインポートを行っている。
 
-`appsettings.json`の設定内容は[appsettings.json](./appsettings.json)の`AzureOpenAI`セクションを参考。
+`appsettings.json`の設定内容は[appsettings.json](./MsGraphSkillsSample/appsettings.json)の`AzureOpenAI`セクションを参考。
 
 ## チャット内部の処理
 
