@@ -1,0 +1,54 @@
+trigger: none
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- checkout: self
+  fetchDepth: 0
+  persistCredentials: true
+- powershell: |
+    git fetch --all
+    git switch main
+    git switch release
+    $url="$(System.TeamFoundationCollectionUri)_apis/git/repositories/{repositoryId}/pullrequests?api-version=7.1-preview.1&searchCriteria.status=completed"
+    # CloseしているPR一覧の取得(ここは時間を指定して件数を抑えたほうが良さそう)
+    $Response=Invoke-RestMethod `
+      -Method get `
+      -Uri $url `
+      -Headers @{
+        "Authorization" = "Bearer $env:SYSTEM_ACCESSTOKEN";
+      } `
+      -TimeoutSec 60
+    $Response.value | ForEach-Object {
+      $labels=$_.labels
+      $containsReleaseLabel=$labels.name -contains "release"
+      # $containsReleaseLabel=$labels.name -contains "$env:RELEASE_LABEL"
+      $containsMergedLabel=$labels.name -notcontains "merged"
+      # $containsMergedLabel=$labels.name -notcontains "$env:MERGED_LABEL"
+      $prId=$_.pullRequestId
+      # リリース対象で且つマージされていないものを抽出
+      if ($containsReleaseLabel -and $containsMergedLabel) {
+          # CommitIdを取得しCherryPickを実行する
+          $lastMergeCommitCommitId=$_.lastMergeCommit.commitId
+          git cherry-pick $lastMergeCommitCommitId
+          # プッシュ
+          git push
+          # マージ済みのLabelをPRに付与する
+          $labelUrl="$(System.TeamFoundationCollectionUri)_apis/git/repositories/{repositoryId}/pullrequests/${prId}/labels?api-version=7.1-preview.1"
+          $body=[System.Text.Encoding]::UTF8.GetBytes('{ "name":"merged" }')
+          # $body=[System.Text.Encoding]::UTF8.GetBytes('{ "name":"$env:MERGED_LABEL" }')
+          Invoke-RestMethod `
+                -Method post `
+                -Uri $labelUrl `
+                -Headers @{
+                  "Authorization" = "Bearer $env:SYSTEM_ACCESSTOKEN";
+                } `
+                -ContentType 'application/json' `
+                -TimeoutSec 60 `
+                -Body $body
+      }
+    }
+  env:
+    SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+  displayName: 'Pickup cherry-pick'
